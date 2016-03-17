@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>关于尺寸一些事儿</title>
+</head>
+<link rel="stylesheet" href="css/main.css">
+<body>
+	<header>
+		<nav>
+			<ul class="nav">
+				<li><a href="#" class="nav_1">TOP</a></li>
+				<li><a href="#" class="nav_2">分辨率</a></li>
+				<li><a href="#" class="nav_3">关于viewport</a></li>
+				<li><a href="#" class="nav_4">关于移动端的尺寸</a></li>
+				<li><a href="#" class="nav_5">效果图还原的探讨</a></li>
+				<li><a href="#" class="nav_6">移动端字体</a></li>
+				<li><a href="#" class="nav_7">关于命名</a></li>
+			</ul>
+		</nav>
+		<button class="btn">BTN</button>
+
+	</header>
+	<section>
+
+		<div class="group" id="box1">
+			<h4>移动端的各种像素</h4>
+			<ul>
+				<li>
+					<mark>css像素</mark><br /><br />
+					网页中的抽象单位，是一个web尺寸概念，不同平台css的对应不同的物理像素
+				</li>
+				<li>
+					<mark>物理像素</mark><br /><br />
+					移动设备分辨率(常见设计效果图以此为基准) 
+				</li>
+				<li>
+					<mark>逻辑像素</mark><br /><br />
+					前端开发以此为基准（window.innerWidth），又理解为设备独立像素(device-width),实则两者近似相等
+				</li>
+				<li>
+					<mark>倍率</mark><br /><br />
+					定义值，又称设备像素比(device pixel ratio)，Retina屏大多为2，理论上为物理像素/逻辑像素(dips)
+				</li>
+			</ul>
+			<p>
+				在桌面浏览器中css的1个像素往往都是对应着电脑屏幕的1个物理像素，常见的1366*768，这可能会造成我们的一个错觉，那就是css中的像素就是设备的物理像素<br />
+				<mark>但css中的像素只是一个抽象的单位，在不同的设备或不同的环境中，css中的1px所代表的设备物理像素是不同的</mark>
+				<img src="images/css.png" alt="">
+
+			</p>
+		</div>
+
+		<div class="group" id="box2">
+			<h4>现有手机分辨率</h4>
+			<p>
+				移动端设备屏幕尺寸多，碎片化严重
+			</p>
+			<div class="imgBox">
+				<img src="images/d0.png" alt="">
+				<img src="images/d1.png" alt="">
+			</div>
+			<em>ppi在120-160之间的手机被归为低密度手机，160-240被归为中密度，240-320被归为高密度，320以上被归为超高密度（Apple给了它一个高大上的名字——Retina）</em><br />
+			<img src="images/d2.png" alt="">
+			<div class="imgBox">
+				<img src="images/bl.png" alt="">
+				<img src="images/4K.png" alt="">
+			</div>
+		</div>
+
+		<div class="group" id="box3">
+			<h4>关于viewport</h4>
+			<p>
+				safari的工程师在发明viewport，width的取值除了像320或960这样的数字，也可以是关键字device-width表示采用设备宽度。 
+			</p>
+			<div class="code">
+				<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">name</span><span style="color: #0000ff;">="viewport"</span><span style="color: #ff0000;"> content</span><span style="color: #0000ff;">="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"</span> <span style="color: #0000ff;">/&gt;</span></pre>
+			</div>
+			<p>
+				 content属性值 :<br />
+			     width:可视区域的宽度，值可为数字或关键词device-width; height:同width<br />
+			     intial-scale:页面首次被显示是可视区域的缩放级别，取值1.0则页面按实际尺寸显示，无任何缩放<br />
+			     maximum-scale=1.0, minimum-scale=1.0;可视区域的缩放级别<br />
+			     maximum-scale用户可将页面放大的程序，1.0将禁止用户放大到实际尺寸之上。<br />
+			     user-scalable:是否可对页面进行缩放，no 禁止缩放
+
+			</p>
+		</div>
+		
+		<div class="group" id="box4">
+			<acticle>
+				<h4>关于移动端的尺寸</h4>
+				<ul>
+					<li>px</li>
+					<li>em</li>
+					<li>rem</li>
+					<li>vw,vh</li>
+					<li>pt</li>
+					<li>...</li>
+				</ul>
+				<p>
+					<img style="width: 50%;" src="images/rem.png" alt="">
+				</p>
+			</acticle>		
+		</div>
+
+		<div class="group" id="box5">
+			<acticle>
+				<h4>效果图还原的探讨</h4>
+				<p>
+					<mark>一份效果图无法百分百还原于不同尺寸的移动设备，但可以利用现有技术近似接近</mark><br /><br />
+					不同分辨率的手机，不同物理尺寸的终端，为了保持良好的视觉体验和用户体验，我们不得不根据逻辑像素为每一个尺寸写一份 Media 代码，那么对应的，设计师也需要设计多套版式供前端使用，这给设计师、前端和测试带来了无尽的麻烦。为此，我们通过前端技术重塑屏幕，重新定义像素尺寸，使用流式布局，通过百分比来响应不同的终端尺寸。
+				</p>
+				<ul>
+					<h5>其他大厂移动web端的尺寸做法</h5>
+					<li>
+						<mark>淘宝</mark><br />
+						<img src="images/tb.png" alt="">
+					</li>
+					<li>
+						<mark>网易</mark><br />
+						<img src="images/wy.png" alt="">
+					</li>
+					<li>
+						<mark>京东</mark><br />
+						<img src="images/jd.png" alt="">
+					</li>
+					<li>
+						<mark>新浪</mark><br />
+						<img src="images/xl.png" alt="">
+					</li>
+				</ul>
+				<p>
+					<mark>京东与新浪大多为弹性布局：关键元素高宽和位置都不变，容器元素做伸缩变换。</mark><br />
+					<img style="width: 80%" src="images/kf1.png" alt=""><br />
+					<mark>网易的动态计算fontSize</mark><br />
+					<img src="images/kf2.png" alt=""><br />
+					<mark>淘宝的既改变viewport又fontSize</mark>
+					<br />
+					<img src="images/kf3.png" alt="">
+					<br />
+					<strong>链接Tips: <a href="http://www.html5cn.org/article-9159-1.html">从网易与淘宝的font-size思考前端设计稿与工作流</a></strong>
+				</p>
+					
+				<p>
+					设计效果图的做法(点dpi即对应逻辑像素，仅供参考)<br />
+					<img src="images/pt.png" alt="">
+				</p>
+				<p>
+					移动端尤其设备尺寸不同没有统一固定标准，界面比较流行的做法是按照iPhone的尺寸来设计。<br />
+					如:<br />
+					<mark>2014年是iPhone5/5s的屏幕。倍率为2，逻辑像素320×568(640*1136)</mark><br />
+					<mark>2015年iPhone6发布后，暂时。倍率为2，逻辑像素375×667(750*1334)</mark><br />
+
+					这样的做法比较实在，倍率2的屏幕无论在iOS还是Android方面都是主流，而且又是2倍屏幕中逻辑像素最小的。<br />
+					所以图片的尺寸可以保持在较小的水平，页面加载速度快。当然，缺点就是在倍率3的设备上看，图片不是特别清晰。<br />
+
+					如果追求图片质量，愿意牺牲加载速度，那么可以按照最大的屏幕来设计。也就是iPhone 6 plus的尺寸，倍率3，逻辑像素414×736。<br /><br />
+					<mark>设计师按照设备像素(device pixel)为单位制作设计稿。<br />
+						前端工程师，参照相关的设备像素比(device pixel ratio)，进行换算以及编码</mark><br /><br />
+					<mark>单位决定了我们的思考方式</mark>
+				</p>
+				<p></p>
+			
+			</acticle>
+			<fieldset>
+			  <legend>结论及方法</legend>
+			  <ul>
+					<li>
+						1、位图在高倍率的屏幕下会出现模糊不清，是因为像素被解析放大的问题。对于高分屏，logo或小的icon图片，要对应倍率的位图或者矢量图的设计稿图（SVG也可替代）
+						<br /><br /><mark>设计稿切出来的图片长宽保证为偶数，并使用backgroud-size把图片缩小为原来的1/2 (非矢量图伪类慎用)</mark>
+					</li>
+					<li>
+						2、现阶段设计常以750px的效果图为基准，前端切图以375px的逻辑像素，1:2的倍率切图，然后分别向上向下做兼容（一些单页场景可以做到较高还原）
+					</li>	
+					<li>
+						3、viewport设置为设备等宽，body设最小值320px，最大640px或750px
+					</li>			
+					<li>
+						4、使用流动布局(百分比%)或弹性布局(弹性盒布局)，尺寸(rem/%/...)灵活使用
+					</li> 
+					<li>
+						5.对定宽等要求较高的利用好media screen（但不推荐）
+					</li> 	
+			  </ul>
+			</fieldset> 
+		</div>	
+
+		<div class="group" id="box6">
+			<h4>移动端的常见字体</h4>
+			<p>
+				<img style="width: 50%;" src="images/font.png" alt="">
+			</p>
+			<div class="demo">
+				<input id="iP" type="text" value=""> 
+				<button class="sub_1">英文</button>
+				<button class="sub_2">中文</button>
+				<br /><br />
+				<mark id="oP"></mark>
+			</div>
+			<p>
+				<img src="images/ff.png" alt="">
+			</p>
+			<fieldset>
+			  <legend>结论及解决方法</legend>
+			  	<ul>
+			  		<li>各个手机系统有自己的默认字体，且都不支持微软雅黑</li>
+			  		<li>如无特殊需求，手机端无需定义中文字体，使用系统默认</li>
+			  		<li>英文字体和数字字体可使用 Helvetica ，三种系统都支持</li>
+			  		<li>
+			  			<mark>
+			  				/* 移动端定义字体的代码 */<br /><br />
+			  				body{font-family:Helvetica;sans-serif}
+			  			</mark>
+			  		</li>
+			  		<li>特殊字体在移动端不推荐，尤其是中文字体包远大于英文字体，影响加载性能，英文字体可酌情引用(LOGO或特殊标记)，考虑必要的平台兼容</li>
+			  	</ul>
+			  	<img style="width:100%" src="images/fontf.png" alt="">
+			</fieldset>
+		</div>
+
+		<div class="group" id="box7">
+			<h4>几种常见的命名方式（匈牙利命名法，驼峰式命名法，帕斯卡命名法，其他标识符）</h4>
+			<ul>
+				<li>1.匈牙利命名法<br /><br />
+					<mark>fName</mark>
+				</li>
+				<li>2.驼峰式命名法<br /><br />
+					<mark>firstName</mark>
+				</li>
+				<li>3.帕斯卡命名法<br /><br />
+				 	<mark>FirstName(又称为大驼峰)</mark>
+				</li>
+				<li>
+					4.标识符<br /><br />
+					<mark>.box_list（下划线）</mark> <mark>.box-list（连接符）</mark>
+				</li>
+				<li>
+					5.tips<br /><br />
+					<mark>ul.nav li.list << .nav .list << .nav_list(从右向左解析)</mark>
+				</li>
+			</ul>
+		</div>
+	</section>
+</body>
+</html>
+<script type="text/javascript" src="js/my.js"></script> 
+<script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+<script>
+		// $("a").on("click",function(){
+		// 	$("html,body").animate({scrollTop:$(".group").offset(100).top},1000);
+		// })
+
+		$(function(){ 
+		    $(".nav_1").click(function(){ 
+		        $.scrollTo('#box1',500); 
+		    }); 
+		    $(".nav_2").click(function(){ 
+		        $.scrollTo('#box2',800); 
+		    }); 
+		    $(".nav_3").click(function(){ 
+		        $.scrollTo('#box3',1000); 
+		    }); 
+		    $(".nav_4").click(function(){ 
+		        $.scrollTo('#box4',1200); 
+		    }); 
+		    $(".nav_5").click(function(){ 
+		        $.scrollTo('#box5',1500); 
+		    }); 
+		    $(".nav_6").click(function(){ 
+		        $.scrollTo('#box6',1800); 
+		    }); 
+		    $(".nav_7").click(function(){ 
+		        $.scrollTo('#box7',2000); 
+		    }); 
+		}); 
+
+		var len=$("li").width()*($("li").length);
+		$(".nav").width(len);
+		$(".btn").on("click",function(){
+			if (!$("header").hasClass("hide")) {
+				$("header").addClass("hide");
+			} else {
+				$("header").removeClass("hide");
+			}
+		})
+
+		function font(btn,index1,index2){
+			$(btn).click(function(){
+				$("#oP").removeClass(index1).addClass(index2).html($("#iP").val());
+			})
+		}
+		font(".sub_1","font_2","font_1");
+		font(".sub_2","font_1","font_2");
+		// if ($("#iP").val()==""||$("#iP").val()==null) {
+		// 	$("#oP").hide();
+		// }else{
+		// 	$("#oP").show();
+		// }
+
+		// alert(document.documentElement.clientWidth);
+		// alert(window.innerWidth);
+
+</script>
